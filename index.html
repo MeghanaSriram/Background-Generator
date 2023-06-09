@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Background Generator Task 2</title>
+  <meta charset="utf-8">
+    <title>My Music</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Background Generator</h1>
+    <div class="color-picker">
+      <label for="color">Color:</label>
+      <input type="color" id="color">
+    </div>
+    <div class="pattern-picker">
+      <label for="pattern">Pattern:</label>
+      <select id="pattern">
+        <option value="dots">Dots</option>
+        <option value="stripes">Stripes</option>
+        <option value="checkered">Checkered</option>
+        <option value="zigzag">Zigzag</option>
+        <option value="plaid">Plaid</option>
+      </select>
+    </div>
+    <div class="shape-picker">
+      <label for="shape">Shape:</label>
+      <select id="shape">
+        <option value="circle">Circle</option>
+        <option value="square">Square</option>
+        <option value="triangle">Triangle</option>
+        <option value="star">Star</option>
+        <option value="heart">Heart</option>
+      </select>
+    </div>
+    <div class="preview"></div>
+    <a href="#" class="generate-btn">Generate Background</a>
+  </div>
+
+  <script>
+    document.querySelector('.generate-btn').addEventListener('click', function() {
+      var color = document.getElementById('color').value;
+      var pattern = document.getElementById('pattern').value;
+      var shape = document.getElementById('shape').value;
+
+      var preview = document.querySelector('.preview');
+      preview.style.background = 'radial-gradient(' + color + ', transparent)';
+      preview.style.backgroundSize = '10px 10px';
+
+      if (pattern === 'dots') {
+        preview.style.backgroundRepeat = 'repeat';
+      } else if (pattern === 'stripes') {
+        preview.style.backgroundImage = 'repeating-linear-gradient(45deg, ' + color + ', ' + color + ' 10px, transparent 10px, transparent 20px)';
+      } else if (pattern === 'checkered') {
+        preview.style.backgroundImage = 'linear-gradient(45deg, ' + color + ' 25%, transparent 25%, transparent 75%, ' + color + ' 75%, ' + color + '), linear-gradient(45deg, ' + color + ' 25%, transparent 25%, transparent 75%, ' + color + ' 75%, ' + color + ')';
+        preview.style.backgroundSize = '20px 20px';
+      } else if (pattern === 'zigzag') {
+        preview.style.backgroundImage = 'repeating-linear-gradient(135deg, ' + color + ', ' + color + ' 25px, transparent 25px, transparent 50px)';
+      } else if (pattern === 'plaid') {
+        preview.style.backgroundImage = 'linear-gradient(90deg, ' + color + ', ' + color + ' 10px, transparent 10px, transparent 20px), linear-gradient(90deg, ' + color + ', ' + color + ' 10px, transparent 10px, transparent 20px)';
+        preview.style.backgroundSize = '20px 20px';
+      }
+
+      var shapeElement = document.createElement('div');
+      shapeElement.className = 'shape ' + shape;
+      preview.appendChild(shapeElement);
+    });
+  </script>
+</body>
+</html>
